@@ -39,6 +39,8 @@ class FavoritePlanets(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     planet_id = Column(Integer, ForeignKey('planet.id'))
     user = relationship(Users)
+    planet = relationship(Planets)
+
 
 class FavoriteCharacters(Base):
     __tablename__ = 'fav_character'
@@ -46,6 +48,18 @@ class FavoriteCharacters(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     character_id = Column(Integer, ForeignKey('character.id'))
     user = relationship(Users)
+    character = relationship(Characters)
+
+    
+class FavoriteVehicles(Base):
+    __tablename__ = 'fav_vehicle'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    vehicle_id = Column(Integer, ForeignKey('vehicle.id'))
+    user = relationship(Users)
+    vehicle = relationship(Vehicles)
+
+    
 
 class Planets(Base):
     __tablename__ = 'planet'
@@ -58,6 +72,13 @@ class Characters(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     description = Column(String(250), nullable=False)
+    
+class Vehicles(Base):
+    __tablename__ = 'vehicle'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    description = Column(String(250), nullable=False)
+
 
     def to_dict(self):
         return {}
